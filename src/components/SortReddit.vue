@@ -2,10 +2,10 @@
   <div>
       Sort Reddits
       <select @change="filterReddit($event)"> 
-          <option value="1000"> 1000+ upvotes </option>
-          <option value="1000"> 500+ upvotes </option>
-          <option value="1000"> 200+ upvotes </option>
-          <option value="1000"> 50+ upvotes </option>
+          <option value="50000-500000"> 50k and above </option>
+          <option value="20000-50000">   20k - 50k upvotes </option>
+          <option value="10000-20000">  10k  - 20k upvotes </option>
+          <option value="0-10000">  0 - 10k upvotes </option>
 
       </select>
   </div>

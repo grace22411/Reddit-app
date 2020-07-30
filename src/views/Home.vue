@@ -22,7 +22,7 @@
                         :reddit="reddit"
                     />
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2 top">
                     <SideInfo 
                          v-for= "user in users" 
                         :key="user.color"
@@ -57,7 +57,7 @@ export default {
             showLoader: false,
             users: [
                 {
-                  user_image : require("../assets/pics-1.png"),
+                  user_image : require('../assets/pics-1.png'),
                   username : "Dannie Trops",
                   user_upvote : "23"
                 },
@@ -72,18 +72,17 @@ export default {
     //     }
     // },
     methods: { 
+        isLoaded(){
+            this.showLoader = false
+        },
         ...mapActions(['fetchReddits'])
     },
 
-    computed: mapGetters(['allReddits'])  ,
-        created() {
-            this.fetchReddits(); 
-        }
-    // created() {
-    //     axios.get("https://www.reddit.com/.json")
-    //         .then(res => this.reddits = res.data)
-    //         .catch(err => console.log(err))
-    // }
+    computed: mapGetters(['allReddits']),
+
+    created() {
+        this.fetchReddits(); 
+    }
 };
 </script>
 
@@ -92,7 +91,10 @@ export default {
             margin-top:40px;
             color:#8F8F8F;
             font-weight: 600;
+            position: relative;
             .row{
+                position: relative;
+                left:0;
                 .col-md-2{
                     h2{
                         font-size:15px;

@@ -1,11 +1,15 @@
 import axios from "axios";
 
 const state = {
-    reddits : [ ]
+    reddits : [ ],
+    originalReddit : [ ]
 }
 
 const getters = {
-    allReddits : (state) => { state.reddits }
+    allReddits : (state) => { 
+         
+        return state.reddits
+    }
 }
 
 
@@ -13,31 +17,53 @@ const actions = {
     async fetchReddits({ commit }) {
         const response = await axios.get('https://www.reddit.com/.json');
 
-        // const data = JSON.parse(response.data)
+        commit('setReddits', response.data.data.children);
 
-        commit('setReddits', response.data);
-
-        console.log(response.data)
     },
-    async searchReddits({ commit } , title) {
-        await axios.get(`https://www.reddit.com/.json/${title}`);
 
+    async searchReddits({ commit } , e) {
+        const title = e.target.value;
+         
         commit('lookReddits', title);
+        
 
     },
 
     async filterReddit({commit}, e){
-        const limit = parseInt(e.target.options[e.target.options.selectedIndex].innerText);
+        const limit = e.target.value;
+
         commit('filterReddit' , limit)
 
-        console.log(limit);
     }
 
 }
 
 const mutations = {
-    setReddits: (state, reddits) => (state.reddits = reddits),
-    lookReddits: (state, title) => (state.reddits = state.reddits.filter(reddit => reddit.title !== title))
+    setReddits: (state, reddits) => {
+        state.reddits = reddits
+        state.originalReddit = reddits
+    },
+
+    lookReddits: (state, title) => {
+        const existingReddits = state.originalReddit
+
+        const filteredResult = existingReddits.filter(item => item.data.title.toLowerCase().includes(title.toLowerCase()))
+        
+        return state.reddits = filteredResult;
+        
+    },
+     
+    filterReddit: (state, ups) => {
+        const existingReddits = state.originalReddit
+        console.log(ups, typeof(ups))
+        const initial = ups.split('-')[0]
+        const final = ups.split('-')[1]
+
+        const filteredResult = existingReddits.filter(item => item.data.ups >= initial && (final !== 'above') && item.data.ups <= final )
+        
+        return state.reddits = filteredResult;
+        
+    },
 
 }
 

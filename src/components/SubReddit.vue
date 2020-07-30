@@ -5,31 +5,30 @@
             <div class="row">
                 <div class="col-md-1 col-2">
                     <i class="fas fa-arrow-up"></i><br>
-                    <p>{{reddit.upVotes}}</p>
+                    <p>{{NumberShortener(reddit.data.ups)}}</p>
                     <i class="fas fa-arrow-down"></i>
                 </div>
                 <div class="col-md-11 col-10">
                     <div class="inner-card">
                             <div class="image-wrap">
-                                <h5>{{reddit.title}}</h5>
+                                <h5>{{reddit.data.title}}</h5>
                             </div>
 
-                            <div class="post-image">
-                                <img :src="reddit.images" class="img-fluid" />
+                            <div v-if="reddit.data.preview && reddit.data.preview.images.length > 0 " class="post-image">
+                                <img :src="reddit.data.preview.images[0].source.url.replace('amp;','')" class="img-fluid" />
                             </div>
                             <div class="text-wrap">
                                 <p>{{reddit.details}}</p>
                             </div>
                         <div class="story-detail">
-                            <img :src="reddit.src" />
                             <p>
-                                posted by
-                                <span>{{reddit.author_fullname}}</span>
+                                Posted by
+                                <span>{{reddit.data.author}}</span>
                             </p>
                             <p>{{reddit.date}}</p>
                             <div class="comment">
                                 
-                                <p><i class="far fa-comment-alt"></i> {{reddit.comment}}</p>
+                                <p> {{reddit.data.upvote_ratio * 100}}% Upvoted</p>
                             </div>
                         </div>
                     </div>
@@ -45,6 +44,15 @@
 export default {
     name: 'SubReddit',
     props: ['reddit'],
+    methods : {
+         NumberShortener : (amount) => {
+            return amount >= 1000 && amount < 1000000
+                ? `${ Math.round((amount/1000) * 10)/10 }K`
+                    : amount >= 1000000
+                    ? `${ Math.round((amount/1000000) * 10)/10 }M`
+                    : amount.toLocaleString()
+        }
+    }
     
 };
 </script>
@@ -69,7 +77,7 @@ a:hover{
         .row {
             .col-md-1{
                 text-align: center;
-                font-size:14px;
+                font-size:13px;
                 p{
                     margin-bottom:0;
                 }
@@ -84,7 +92,7 @@ a:hover{
                     padding:8px 0;
                     img{
                         width:100%;
-                        height:350px;
+                        height:auto;
                     }
                 }
                 .text-wrap{
@@ -102,7 +110,7 @@ a:hover{
                         p{
                             font-size:13px;
                             font-weight: 600;
-                            margin-left: 20px;;
+                            //margin-left: 20px;;
                             span{
                                 color:#3D5AF1;
                             }

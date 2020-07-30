@@ -25,6 +25,7 @@ export default {
   body{
     width:100%;
     height:100%;
+    position: relative;
     background-color: #FCFCFC;
     padding:0;
     margin:0;

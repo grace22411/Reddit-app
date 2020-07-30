@@ -1,5 +1,8 @@
 <template>
     <div class="about">
+        <div class="container">
+            <h1>Coming soon</h1>
+        </div>
        <!-- <div class="container">
            <div class="row">
                <div class="col-md-10">

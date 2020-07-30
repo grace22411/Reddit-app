@@ -1,14 +1,14 @@
 <template>
     <div>
         
-        <header>
+        <header class="sticky-top">
             <div class="container">
                 <div class="row">
                     <div class="col-md-2 col-2 logo">
                         <router-link to="/" ><i class="fab fa-reddit-square"></i></router-link>
                     </div>
                     <div class="col-md-8 col-8 search-input">
-                        <input @input="searchReddits(reddit.title)" type="text" placeholder="Search for topic">
+                        <input @input="searchReddits" type="text" placeholder="Search for topic">
                     </div>
                     <div class="col-md-2 col-2 profile">
                         <i class="far fa-bell"></i>
@@ -25,8 +25,10 @@
 import { mapActions } from "vuex";
 export default {
     name : "AppNavigation",
+    props: ['reddit'],
     methods: { 
         ...mapActions(['searchReddits'])
+
     },
    
 }
@@ -39,6 +41,12 @@ export default {
         width:100%;
         background-color: #fff;
         padding:20px 0;
+        position: sticky;
+        left:0;
+        clear:both;
+        z-index:9999;
+        top:0;
+
         .container{
             background-color: #fff;
         }
@@ -93,14 +101,20 @@ export default {
               }
            }
             @media only screen and (min-width:321px) and (max-width:540px){
-                 input{
-                   width:95%;
-               }
+                 .fa-bell{
+                  display: none;
+              }
+              img{
+                  margin-left: 0;;
+              }
             }
             @media only screen and (min-width:541px) and (max-width:720px){
-                 input{
-                   width:85%;
-               }
+                 .fa-bell{
+                  display: none;
+              }
+              img{
+                  margin-left: 0;;
+              }
             }
             
         }

@@ -4,25 +4,25 @@
         <div class="container-fluid top-users">
             <h4>Top Users</h4>
             <div class="row">
-                <div class="col-md-1">
+                <div class="image-top">
                     <img :src="user.src" />
                 </div>
-                <div class="col-md-8">
+                <div class="name-top">
                     <p>{{user.username}}</p>
                 </div>
-                <div class="col-md-3">
-                    <p><i class="fas fa-arrow-up"></i> {{user.user_upvote}}</p>
+                <div class="upvote">
+                    <p> {{user.user_upvote}}<i class="fas fa-arrow-up"></i></p>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-1">
+                <div class="image-top">
                     <img :src="user.src" />
                 </div>
-                <div class="col-md-8">
+                <div class="name-top">
                     <p>{{user.username}}</p>
                 </div>
-                <div class="col-md-3">
-                    <p><i class="fas fa-arrow-up"></i> {{user.user_upvote}}</p>
+                <div class="upvote">
+                    <p>{{user.user_upvote}} <i class="fas fa-arrow-up"></i> </p>
                 </div>
             </div>
         </div>
@@ -82,7 +82,8 @@ export default {
              }
              .row{
                  display: flex;
-                 .col-md-1{
+                 padding:0 10px;
+                 .image-top{
                      img{
                          height:10px;
                          width:10px;
@@ -91,15 +92,16 @@ export default {
                          font-size:11px;
                      }
                  }
-                 .col-md-8{
+                 .name-top{
                      p{
                          font-size:11px;
                          margin: 0;
                          color:#3D5AF1;
                      }
                  }
-                 .col-md-3{
+                 .upvote{
                      font-size: 12px;
+                     margin-left:auto
                  }
              }
         }

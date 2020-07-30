@@ -143,4 +143,10 @@ export default {
                    .col-md-2{
                        display:none;
                    }
-               
+                   .col-md-8{
+                       padding:0 50px;
+                   }
+               }
+            }
+        }
+</style>

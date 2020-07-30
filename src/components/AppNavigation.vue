@@ -97,4 +97,12 @@ export default {
                    width:95%;
                }
             }
-            @media only screen and (min-width:541px) and (max-widt
+            @media only screen and (min-width:541px) and (max-width:720px){
+                 input{
+                   width:85%;
+               }
+            }
+            
+        }
+    }
+</style>

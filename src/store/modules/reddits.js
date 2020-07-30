@@ -24,4 +24,26 @@ const actions = {
 
         commit('lookReddits', title);
 
-    },
+    },
+
+    async filterReddit({commit}, e){
+        const limit = parseInt(e.target.options[e.target.options.selectedIndex].innerText);
+        commit('filterReddit' , limit)
+
+        console.log(limit);
+    }
+
+}
+
+const mutations = {
+    setReddits: (state, reddits) => (state.reddits = reddits),
+    lookReddits: (state, title) => (state.reddits = state.reddits.filter(reddit => reddit.title !== title))
+
+}
+
+export default  {
+    state,
+    getters,
+    actions,
+    mutations
+}

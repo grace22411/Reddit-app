@@ -25,7 +25,7 @@
                                 Posted by
                                 <span>{{reddit.data.author}}</span>
                             </p>
-                            <p>{{reddit.date}}</p>
+                            <p class="date">{{readableDate(reddit.data.created )}}</p>
                             <div class="comment">
                                 
                                 <p> {{reddit.data.upvote_ratio * 100}}% Upvoted</p>
@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import moment from "moment"
 
 export default {
     name: 'SubReddit',
@@ -51,6 +52,10 @@ export default {
                     : amount >= 1000000
                     ? `${ Math.round((amount/1000000) * 10)/10 }M`
                     : amount.toLocaleString()
+        },
+        readableDate : (timeStamp) => {
+          return  moment(new Date(timeStamp * 1000)).fromNow()
+            
         }
     }
     
@@ -71,7 +76,7 @@ a:hover{
     cursor:pointer;
     padding: 20px 50px 10px 0 ;
     height: auto;
-    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 15px 20px rgba(2, 1, 1, 0.02);
     border-radius: 8px;
     .container-fluid {
         .row {
@@ -114,6 +119,9 @@ a:hover{
                             span{
                                 color:#3D5AF1;
                             }
+                        }
+                        .date{
+                            margin-left: 20px;
                         }
                         .comment{
                             margin-left:auto;

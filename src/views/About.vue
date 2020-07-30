@@ -1,73 +1,49 @@
 <template>
     <div class="about">
+         <Loader :isVisible = "showLoader" />
         <div class="container">
             <h1>Coming soon</h1>
         </div>
-       <!-- <div class="container">
-           <div class="row">
-               <div class="col-md-10">
-                    <Details
-                        v-for= "reddit in allReddits" 
-                        :key="reddit.id"
-                        :reddit="reddit"
-                    />
-               </div>
-               <div class="col-md-2">
-                   <SideInfo 
-                         v-for= "user in users" 
-                        :key="user.color"
-                        :user="user"
-                    />
-               </div>
-           </div>
-       </div> -->
+       
     </div>
 </template>
 
 <script>
 
-// import Details from "../components/Details"
-// import SideInfo from "../components/SideInfo"
-// export default {
-//     name : "About",
-//     components : {
-//         Details,
-//         SideInfo
-//     },
+import Loader from "../components/Loader"
+import { mapGetters , mapActions } from "vuex";
+
+export default {
+    name : "About",
+    components : {
+       Loader
+    },
    
-//       data () {
-//         return {
-//             showLoader: false,
-//             users: [
-//                 {
-//                   user_image : require("../assets/pics-1.png"),
-//                   username : "Dannie Trops",
-//                   user_upvote : "23"
-//                 },
-//             ]
+      data () {
+        return {
+            showLoader: true,
+            users: [
+                {
+                  user_image : require("../assets/pics-1.png"),
+                  username : "Dannie Trops",
+                  user_upvote : "23"
+                },
+            ]
 
-//         }
-//     },
+        }
+    },
+    methods: { 
+        isLoaded(){
+            this.showLoader = false
+        },
+        ...mapActions(['fetchReddits'])
+    },
 
-//     // methods : {
-//     //     isLoaded(){
-//     //         this.showLoader = false
-//     //     }
-//     // },
-//     methods: { 
-//         ...mapActions(['fetchReddits'])
-//     },
-
-//     computed: mapGetters(['allReddits'])  ,
-//         created() {
-//             this.fetchReddits(); 
-//         }
-//     // created() {
-//     //     axios.get("https://www.reddit.com/.json")
-//     //         .then(res => this.reddits = res.data)
-//     //         .catch(err => console.log(err))
-//     // }
-// };
+    computed: mapGetters(['allReddits'])  ,
+        async created() {
+            await this.fetchReddits(); 
+        }
+};
 
 </script>
 

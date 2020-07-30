@@ -54,7 +54,7 @@ export default {
     },
       data () {
         return {
-            showLoader: false,
+            showLoader: true,
             users: [
                 {
                   user_image : require('../assets/pics-1.png'),
@@ -66,22 +66,20 @@ export default {
         }
     },
 
-    // methods : {
-    //     isLoaded(){
-    //         this.showLoader = false
-    //     }
-    // },
+    
     methods: { 
-        isLoaded(){
-            this.showLoader = false
-        },
+    isLoaded(){
+        this.showLoader = false
+    },
+
         ...mapActions(['fetchReddits'])
     },
 
     computed: mapGetters(['allReddits']),
 
-    created() {
-        this.fetchReddits(); 
+   async created() {
+        await this.fetchReddits(); 
+        this.isLoaded();
     }
 };
 </script>

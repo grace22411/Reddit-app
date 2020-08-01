@@ -13,6 +13,24 @@ const getters = {
     }
 }
 
+const categorizeReddits = (reddits) => {
+    const categorized = {}
+    reddits.forEach(element => {
+        const subReddit = element.data.subreddit;
+
+        if (!(subReddit in categorized)){
+            categorized[subReddit] = [element]
+        } else {
+            categorized[subReddit].push(element);
+        }
+
+
+    });
+    console.log(Object.keys(categorized));
+    return categorized;
+
+}
+
 
 const actions = {
     async fetchReddits({ commit }) {
@@ -57,7 +75,7 @@ const actions = {
 
 const mutations = {
     setReddits: (state, reddits) => {
-        state.reddits = reddits
+        state.reddits = categorizeReddits(reddits)
         state.originalReddit = reddits
     },
 
@@ -66,7 +84,7 @@ const mutations = {
 
         const filteredResult = existingReddits.filter(item => item.data.title.toLowerCase().includes(title.toLowerCase()))
         
-        return state.reddits = filteredResult;
+        return state.reddits = categorizeReddits(filteredResult);
         
     },
      
@@ -78,7 +96,7 @@ const mutations = {
 
         const filteredResult = existingReddits.filter(item => item.data.ups >= initial && (final !== 'above') && item.data.ups <= final )
         
-        return state.reddits = filteredResult;
+        return state.reddits = categorizeReddits(filteredResult);
         
     },
 
@@ -99,7 +117,7 @@ const mutations = {
             });
         }
 
-        return state.reddits = sortedResult;
+        return state.reddits = categorizeReddits(sortedResult);
         
     },
 
@@ -113,7 +131,7 @@ const mutations = {
             
         });
         
-        return state.reddits = filteredResult;
+        return state.reddits = categorizeReddits(filteredResult);
         
     },
 

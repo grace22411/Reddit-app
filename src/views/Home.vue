@@ -14,7 +14,17 @@
                     </ul>
                 </div>
                 <div class="col-md-8">
-                    <SortReddit />
+                    <div class="row">
+                        <div class="col-md-4 col-6">
+                            <SortReddit />
+                        </div>
+                        <div class="col-md-4 col-6">
+                            <UpvoteSorter />
+                        </div>
+                        <div class="col-md-4 col-6">
+                            <DateFilter />
+                        </div>
+                    </div>
                     
                     <SubReddit 
                         v-for= "reddit in allReddits" 
@@ -41,6 +51,8 @@ import SubReddit from "../components/SubReddit"
 import Loader from "../components/Loader"
 import SideInfo from "../components/SideInfo"
 import SortReddit from "../components/SortReddit"
+import UpvoteSorter from "../components/UpvoteSorter"
+import DateFilter from "../components/DateFilter"
 import { mapGetters , mapActions } from "vuex";
 
 export default {
@@ -49,7 +61,9 @@ export default {
        SubReddit,
        Loader,
        SideInfo,
-       SortReddit
+       SortReddit,
+       UpvoteSorter,
+       DateFilter
 
     },
       data () {

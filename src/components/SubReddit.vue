@@ -15,7 +15,7 @@
                             </div>
 
                             <div v-if="reddit.data.preview && reddit.data.preview.images.length > 0 " class="post-image">
-                                <img :src="reddit.data.preview.images[0].source.url.replace('amp;','')" class="img-fluid" />
+                                <img :src="reddit.data.preview.images[0].source.url.replace(/amp;/g,'')" class="img-fluid" />
                             </div>
                             <div class="text-wrap">
                                 <p>{{reddit.details}}</p>

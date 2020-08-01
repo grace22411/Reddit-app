@@ -1,6 +1,6 @@
 <template>
   <div>
-      Sort Reddits
+      Filter Reddits by upvotes
       <select @change="filterReddit($event)"> 
           <option value="50000-500000"> 50k and above </option>
           <option value="20000-50000">   20k - 50k upvotes </option>
@@ -23,8 +23,10 @@ export default {
 
 <style lang="scss" scoped>
     select{
-        margin-bottom:15px;
+      margin-bottom:15px;
+        margin-top: 5px;
         padding: 6px;
-        border: #3D5AF1 1px solid;
+        width:100%;
+        border: #b0b0b0 1px solid;
     }
 </style>
